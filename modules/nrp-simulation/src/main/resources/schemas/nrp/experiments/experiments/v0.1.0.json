@@ -8,7 +8,9 @@
   ],
   "@type": "nxv:Schema",
   "imports": [
-    "{{base}}/schemas/nrp/simulation/bibiconfiguration/v0.1.0"
+    "{{base}}/schemas/nrp/simulation/bibiconfiguration/v0.1.0",
+    "{{base}}/schemas/nrp/experiments/environment/v0.1.0",
+    "{{base}}/schemas/nrp/experiments/statemachine/v0.1.0"
   ],
   "shapes": [
     {
@@ -23,6 +25,45 @@
         },
         {
           "property": [
+            {
+              "path": "nsg:thumbnail",
+              "name": "Thumbnail Image",
+              "class": "xsd:string",
+              "minCount": 1,
+              "maxCount": 1
+            },
+            {
+              "path": "nsg:bibiConfig",
+              "name": "BIBI Configuration",
+              "description": "The Brain and Body Integration that should be used in this experiment",
+              "class": "nsg:BIBIConfiguration",
+              "node": "{{base}}/schemas/nrp/simulation/bibiconfiguration/v0.1.0/shapes/BIBIConfigurationShape",
+              "minCount": 1,
+              "maxCount": 1
+            },
+            {
+              "path": "nsg:environment",
+              "name": "Environment",
+              "description": "The environment to which the robot should be spawned",
+              "class": "nsg:Environment",
+              "node": "{{base}}/schemas/nrp/experiments/environment/v0.1.0/shapes/EnvironmentShape",
+              "minCount": 1,
+              "maxCount": 1
+            },
+            {
+              "path": "nsg:control",
+              "name": "Control State Machines",
+              "description": "The state machines that control the protocol of the experiment",
+              "class": "nsg:StateMachine",
+              "node": "{{base}}/schemas/nrp/experiments/statemachine/v0.1.0/shapes/StateMachineShape"
+            },
+            {
+              "path": "nsg:evaluation",
+              "name": "Evaluation State Machines",
+              "description": "The state machines that evaluate the outcome of the experiment",
+              "class": "nsg:StateMachine",
+              "node": "{{base}}/schemas/nrp/experiments/statemachine/v0.1.0/shapes/StateMachineShape"
+            }
           ]
         }
       ]

@@ -20,6 +20,12 @@
         },
         {
           "property": [
+            {
+              "path": "nsg:code",
+              "name": "Code",
+              "description": "The code for this state machine",
+              "class": "xsd:string"
+            }
           ]
         }
       ]

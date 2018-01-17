@@ -1,0 +1,37 @@
+{
+  "@context": [
+    "{{base}}/contexts/nexus/core/resource/v0.1.0",
+    "{{base}}/contexts/bbp/core/entity/v0.1.0",
+    "{{base}}/contexts/bbp/neurosciencegraph/core/v0.1.0"
+  ],
+  "@type": "nsg:Experiment",
+  "name": "Husky Braitenberg in Holodeck",
+  "description": "A simple Husky Braitenberg example experiment in the holodeck",
+  "thumbnail": "file:///some/path/to/a/thumbnail/file.png",
+  "bibiConfig": {
+    "@id": "{{base}}/data/nrp/simulation/bibiconfiguration/v0.1.0/01234-56789",
+    "@type": "nsg:BIBIConfiguration"
+  },
+  "environment": {
+    "@type": "nsg:Environment",
+    "name": "Holodeck",
+    "description": "A nice room used for experiments",
+    "worldfile": "file:///some/path/to/the/holodeck.sdf",
+    "robotposition": {
+      "x": 0,
+      "y": 0,
+      "z": 1,
+      "ux": 1,
+      "uy": 0,
+      "uz": 0
+    },
+    "cameraPosition": {
+      "x": 1,
+      "y": 1,
+      "z": 1,
+      "ux": -1,
+      "uy": -1,
+      "uz": -1
+    }
+  }
+}

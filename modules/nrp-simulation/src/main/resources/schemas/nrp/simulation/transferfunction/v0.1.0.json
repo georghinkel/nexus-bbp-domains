@@ -34,7 +34,9 @@
             {
               "path": "nsg:parameterMappings",
               "name": "Parameter Mappings",
-              "description": "Parameter Mappings of the Transfer Function"
+              "description": "Parameter Mappings of the Transfer Function",
+              "class": "nsg:ParameterMapping",
+              "node": "this:ParameterMappingShape"
             }
           ]
         }

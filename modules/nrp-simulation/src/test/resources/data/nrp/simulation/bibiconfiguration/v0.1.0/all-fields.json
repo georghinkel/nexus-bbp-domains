@@ -4,8 +4,9 @@
     "{{base}}/contexts/bbp/core/entity/v0.1.0",
     "{{base}}/contexts/bbp/neurosciencegraph/core/v0.1.0"
   ],
+  "@id": "{{base}}/data/nrp/simulation/bibiconfiguration/v0.1.0/01234-56789",
   "@type": "nsg:BIBIConfiguration",
-  "name": "A simple example",
+  "name": "A simple example BIBI configuration for the Husky Braitenberg experiment",
   "neuralnetwork": {
     "@id": "",
     "@type": ""
@@ -16,15 +17,17 @@
     "sdf": "file:///path/to/storage/robots/husky/model.sdf",
     "sensors": [
       {
+        "@id": "{{base}}/data/nrp/simulation/topic/v0.1.0/husky/camera",
         "@type": "nsg:Topic",
         "name": "camera",
         "description": "The camera sensor mounted on top of the Husky robot",
-        "rostopic": "/husky/Camera",
+        "rostopic": "/husky/camera",
         "type": "sensor_msgs/Image"
       }
     ],
     "actuators": [
       {
+        "@id": "{{base}}/data/nrp/simulation/topic/v0.1.0/husky/cmd_vel",
         "@type": "nsg:Topic",
         "name": "twist",
         "description": "Controls the robot twist",
@@ -33,18 +36,53 @@
       }
     ]
   },
+  "mode": {
+    "@type": "nsg:ServerConfiguration",
+    "name": "Nest and Gazebo (best effort)",
+    "configtype": "BestEffortNestGazebo",
+    "deterministic": false
+  },
+  "timestep": 20,
   "transferfunctions": [
     {
       "@type": "nsg:TransferFunction",
       "name": "eye_sensor_transmit",
       "description": "Transmits camera images to the network",
-      "code": "..."
+      "code": "...",
+      "parameterMappings": [
+        {
+          "@type": "nsg:SpikeSourceMapping",
+          "name": "sensor_neurons",
+          "type": "poisson"
+        },
+        {
+          "@type": "nsg:RobotSubscribeMapping",
+          "name": "camera",
+          "topic": {
+            "@id": "{{base}}/data/nrp/simulation/topic/v0.1.0/husky/camera"
+          }
+        }
+      ]
     },
     {
       "@type": "nsg:TransferFunction",
       "name": "linear_twist",
       "description": "Transmits actor neuron membrane potential to robot commands",
-      "code": "..."
+      "code": "...",
+      "parameterMappings": [
+        {
+          "@type": "nsg:SpikeSinkMapping",
+          "name": "left_actuator",
+          "type": "leaky_integrator_alpha"
+        },
+        {
+          "@type": "nsg:RobotPublishMapping",
+          "name": "right_actuator",
+          "topic": {
+            "@id": "{{base}}/data/nrp/simulation/topic/v0.1.0/husky/cmd_vel"
+          }
+        }
+      ]
     }
   ]
 }
