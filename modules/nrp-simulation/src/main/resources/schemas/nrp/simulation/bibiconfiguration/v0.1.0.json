@@ -1,0 +1,71 @@
+{
+  "@context": [
+    "{{base}}/contexts/nexus/core/schema/v0.1.0",
+    {
+      "nsg": "https://bbp-nexus.epfl.ch/vocabs/bbp/neurosciencegraph/core/v0.1.0/",
+      "this": "{{base}}/schemas/nrp/simulation/bibiconfiguration/v0.1.0/shapes/"
+    }
+  ],
+  "@type": "nxv:Schema",
+  "imports": [
+    "{{base}}/schemas/nrp/simulation/robot/v0.1.0",
+    "{{base}}/schemas/nrp/simulation/transferfunction/v0.1.0",
+    "{{base}}/schemas/nrp/simulation/serverconfiguration/v0.1.0"
+  ],
+  "shapes": [
+    {
+      "@id": "this:BIBIConfigurationShape",
+      "@type": "sh:NodeShape",
+      "label": "This shape represents the configuration of the brain and body integration",
+      "targetClass": "nsg:BIBIConfiguration",
+      "nodekind": "sh:BlankNodeOrIRI",
+      "and": [
+        {
+          "node": "{{base}}/schemas/bbp/core/entity/v0.1.0/shapes/EntityShape"
+        },
+        {
+          "property": [
+            {
+              "path": "nsg:neuralnetwork",
+              "name": "Neural Network",
+              "description": "The neural network that should be simulated",
+              "minCount": 1,
+              "maxCount": 1
+            },
+            {
+              "path": "nsg:robot",
+              "name": "Robot",
+              "description": "The robot that should serve as body for the network",
+              "class": "nsg:Robot",
+              "node": "{{base}}/schemas/nrp/simulation/robot/v0.1.0/shapes/RobotShape",
+              "maxCount": 1,
+              "minCount": 1
+            },
+            {
+              "path": "nsg:mode",
+              "name": "Server Configuration",
+              "description": "Defines the configuration in which a simulation should be run",
+              "class": "nsg:ServerConfiguration",
+              "node": "{{base}}/schemas/nrp/simulation/serverconfiguration/v0.1.0/shapes/ServerConfigurationShape",
+              "maxCount": 1
+            },
+            {
+              "path": "nsg:timestep",
+              "name": "Timestep",
+              "description": "The timestep of the simulation",
+              "class": "xsd:positiveInteger",
+              "maxCount": 1
+            },
+            {
+              "path": "nsg:transferfunction",
+              "name": "Transfer Functions",
+              "description": "The transfer functions between the neural network and the robot",
+              "class": "nsg:TransferFunction",
+              "node": "{{base}}/schemas/nrp/simulation/transferfunction/v0.1.0/shapes/TransferFunctionShape"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

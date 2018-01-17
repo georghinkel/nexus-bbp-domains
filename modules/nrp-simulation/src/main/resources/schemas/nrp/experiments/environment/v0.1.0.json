@@ -1,0 +1,111 @@
+{
+  "@context": [
+    "{{base}}/contexts/nexus/core/schema/v0.1.0",
+    {
+      "nsg": "https://bbp-nexus.epfl.ch/vocabs/bbp/neurosciencegraph/core/v0.1.0/",
+      "this": "{{base}}/schemas/nrp/experiments/environment/v0.1.0/shapes/"
+    }
+  ],
+  "@type": "nxv:Schema",
+  "shapes": [
+    {
+      "@id": "this:EnvironmentShape",
+      "@type": "sh:NodeShape",
+      "label": "This shape represents the environment for a neurorobotics experiment",
+      "targetClass": "nsg:Environment",
+      "nodekind": "sh:BlankNodeOrIRI",
+      "and": [
+        {
+          "node": "{{base}}/schemas/bbp/core/entity/v0.1.0/shapes/EntityShape"
+        },
+        {
+          "property": [
+            {
+              "path": "nsg:worldfile",
+              "name": "World file",
+              "description": "The path to the World file that contains the environment definition",
+              "minCount": 1,
+              "maxCount": 1,
+              "class": "xsd:string"
+            },
+            {
+              "path": "nsg:robotposition",
+              "name": "Robot position",
+              "description": "The position where the robot should be spawned",
+              "class": "nsg:Pose",
+              "node": "this:PoseShape",
+              "maxCount": 1,
+              "minCount": 1
+            },
+            {
+              "path": "nsg:cameraposition",
+              "name": "Camera position",
+              "description": "The position where the camera should be spawned",
+              "class": "nsg:Pose",
+              "node": "this:PoseShape",
+              "maxCount": 1,
+              "minCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "this:PoseShape",
+      "@type": "sh:NodeShape",
+      "label": "This shape represents a pose",
+      "targetClass": "nsg:Pose",
+      "nodekind": "sh:BlankNodeOrIRI",
+      "property": [
+        {
+          "path": "nsg:x",
+          "name": "x",
+          "description": "The x coordinate",
+          "class": "xsd:double",
+          "minCount": 1,
+          "maxCount": 1
+        },
+        {
+          "path": "nsg:y",
+          "name": "y",
+          "description": "The y coordinate",
+          "class": "xsd:double",
+          "minCount": 1,
+          "maxCount": 1
+        },
+        {
+          "path": "nsg:z",
+          "name": "z",
+          "description": "The z coordinate",
+          "class": "xsd:double",
+          "minCount": 1,
+          "maxCount": 1
+        },
+        {
+          "path": "nsg:ux",
+          "name": "ux",
+          "description": "The ux coordinate",
+          "class": "xsd:double",
+          "minCount": 1,
+          "maxCount": 1
+        },
+        {
+          "path": "nsg:uy",
+          "name": "uy",
+          "description": "The uy coordinate",
+          "class": "xsd:double",
+          "minCount": 1,
+          "maxCount": 1
+        },
+        {
+          "path": "nsg:uz",
+          "name": "uz",
+          "description": "The uz coordinate",
+          "class": "xsd:double",
+          "minCount": 1,
+          "maxCount": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "@context": [
+    "{{base}}/contexts/nexus/core/schema/v0.1.0",
+    {
+      "nsg": "https://bbp-nexus.epfl.ch/vocabs/bbp/neurosciencegraph/core/v0.1.0/",
+      "this": "{{base}}/schemas/nrp/simulation/transferfunction/v0.1.0/shapes/"
+    }
+  ],
+  "@type": "nxv:Schema",
+  "imports": [
+    "{{base}}/schemas/nrp/simulation/topic/v0.1.0"
+  ],
+  "shapes": [
+    {
+      "@id": "this:TransferFunctionShape",
+      "@type": "sh:NodeShape",
+      "label": "This shape represents a connection between the robot and the neural network",
+      "targetClass": "nsg:BIBIConfiguration",
+      "nodekind": "sh:BlankNodeOrIRI",
+      "and": [
+        {
+          "node": "{{base}}/schemas/bbp/core/entity/v0.1.0/shapes/EntityShape"
+        },
+        {
+          "property": [
+            {
+              "path": "nsg:code",
+              "name": "Code",
+              "description": "The code for the TF",
+              "class": "xsd:string",
+              "maxCount": 1,
+              "minCount": 1
+            },
+            {
+              "path": "nsg:parameterMappings",
+              "name": "Parameter Mappings",
+              "description": "Parameter Mappings of the Transfer Function"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "this:ParameterMappingShape",
+      "@type": "sh:NodeShape",
+      "label": "The shape represents a single device connection to the neural or world simulator",
+      "targetClass": "nsg:ParameterMapping",
+      "nodeKind": "sh:BlankNode",
+      "property": [
+        {
+          "path": "nsg:name",
+          "name": "Parameter Name",
+          "description": "The name of the parameter that is connected",
+          "maxCount": 1,
+          "minCount": 1
+        }
+      ]
+    },
+    {
+      "@id": "this:NeuralMappingShape",
+      "@type": "sh:NodeShape",
+      "label": "The shape represents a connection to a spike source in the neural network",
+      "targetClass": "nsg:NeuralMapping",
+      "nodeKind": "sh:BlankNode",
+      "and": [
+        {
+          "node": "this:ParameterMappingShape"
+        },
+        {
+          "property": [
+            {
+              "path": "nsg:population",
+              "name": "Population",
+              "description": "The connected population",
+              "minCount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "this:SpikeSourceMappingShape",
+      "@type": "sh:NodeShape",
+      "label": "The shape represents a connection to a spike source in the neural network",
+      "targetClass": "nsg:SpikeSourceMapping",
+      "nodeKind": "sh:BlankNode",
+      "and": [
+        {
+          "node": "this:NeuralMappingShape"
+        },
+        {
+          "property": [
+            {
+              "path": "nsg:type",
+              "name": "Spike Source Type",
+              "description": "The type of spike source",
+              "minCount": 1,
+              "maxCount": 1,
+              "in": [
+                "poisson",
+                "fixed_frequency",
+                "ac_current",
+                "dc_current",
+                "noisy_current"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "this:SpikeSinkMappingShape",
+      "@type": "sh:NodeShape",
+      "label": "The shape represents a connection to a spike sink in the neural network",
+      "targetClass": "nsg:SpikeSinkMapping",
+      "nodeKind": "sh:BlankNode",
+      "and": [
+        {
+          "node": "this:NeuralMappingShape"
+        },
+        {
+          "property": [
+            {
+              "path": "nsg:type",
+              "name": "Spike Sink Type",
+              "description": "The type of spike sink",
+              "minCount": 1,
+              "maxCount": 1,
+              "in": [
+                "population_rate",
+                "leaky_integrator_alpha",
+                "leaky_integrator_exp",
+                "spike_recorder"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "this:RobotMappingShape",
+      "@type": "sh:NodeShape",
+      "label": "The shape represents a connection to a spike source in the neural network",
+      "targetClass": "nsg:RobotMapping",
+      "nodeKind": "sh:BlankNode",
+      "and": [
+        {
+          "node": "this:ParameterMappingShape"
+        },
+        {
+          "property": [
+            {
+              "path": "nsg:topic",
+              "name": "Topic",
+              "description": "The connected topic",
+              "minCount": 1,
+              "maxCount": 1,
+              "class": "nsg:Topic",
+              "node": "{{base}}/schemas/nrp/simulation/topic/v0.1.0/shapes/TopicShape"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@id": "this:RobotPublishMappingShape",
+      "@type": "sh:NodeShape",
+      "label": "The shape represents a connection to a robot by publishing values",
+      "targetClass": "nsg:RobotPublishMapping",
+      "nodeKind": "sh:BlankNode",
+      "node": "this:RobotMappingShape"
+    },
+    {
+      "@id": "this:RobotSubscribeMappingShape",
+      "@type": "sh:NodeShape",
+      "label": "The shape represents a connection to a robot by subscribing values",
+      "targetClass": "nsg:RobotSubscribeMapping",
+      "nodeKind": "sh:BlankNode",
+      "node": "this:RobotMappingShape"
+    }
+  ]
+}

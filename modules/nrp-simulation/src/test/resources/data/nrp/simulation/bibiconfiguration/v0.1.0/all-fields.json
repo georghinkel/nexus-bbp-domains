@@ -1,0 +1,50 @@
+{
+  "@context": [
+    "{{base}}/contexts/nexus/core/resource/v0.1.0",
+    "{{base}}/contexts/bbp/core/entity/v0.1.0",
+    "{{base}}/contexts/bbp/neurosciencegraph/core/v0.1.0"
+  ],
+  "@type": "nsg:BIBIConfiguration",
+  "name": "A simple example",
+  "neuralnetwork": {
+    "@id": "",
+    "@type": ""
+  },
+  "robot": {
+    "@type": "nsg:Robot",
+    "name": "Clearpath Husky robot",
+    "sdf": "file:///path/to/storage/robots/husky/model.sdf",
+    "sensors": [
+      {
+        "@type": "nsg:Topic",
+        "name": "camera",
+        "description": "The camera sensor mounted on top of the Husky robot",
+        "rostopic": "/husky/Camera",
+        "type": "sensor_msgs/Image"
+      }
+    ],
+    "actuators": [
+      {
+        "@type": "nsg:Topic",
+        "name": "twist",
+        "description": "Controls the robot twist",
+        "rostopic": "/husky/cmd_vel",
+        "type": "geometry_msgs/Twist"
+      }
+    ]
+  },
+  "transferfunctions": [
+    {
+      "@type": "nsg:TransferFunction",
+      "name": "eye_sensor_transmit",
+      "description": "Transmits camera images to the network",
+      "code": "..."
+    },
+    {
+      "@type": "nsg:TransferFunction",
+      "name": "linear_twist",
+      "description": "Transmits actor neuron membrane potential to robot commands",
+      "code": "..."
+    }
+  ]
+}

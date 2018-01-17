@@ -1,0 +1,45 @@
+{
+  "@context": [
+    "{{base}}/contexts/nexus/core/schema/v0.1.0",
+    {
+      "nsg": "https://bbp-nexus.epfl.ch/vocabs/bbp/neurosciencegraph/core/v0.1.0/",
+      "this": "{{base}}/schemas/nrp/simulation/topic/v0.1.0/shapes/"
+    }
+  ],
+  "@type": "nxv:Schema",
+  "shapes": [
+    {
+      "@id": "this:TopicShape",
+      "@type": "sh:NodeShape",
+      "label": "This shape represents a robot interface",
+      "targetClass": "nsg:Topic",
+      "nodekind": "sh:BlankNodeOrIRI",
+      "and": [
+        {
+          "node": "{{base}}/schemas/bbp/core/entity/v0.1.0/shapes/EntityShape"
+        },
+        {
+          "property": [
+            {
+              "path": "nsg:rostopic",
+              "name": "ROS Topic",
+              "description": "The ROS topic name where this topic can be found",
+              "class": "xsd:string"
+            },
+            {
+              "path": "nsg:topictype",
+              "name": "Type",
+              "description": "The name of the type for this topic",
+              "class": "xsd:string"            },
+            {
+              "path": "nsg:description",
+              "name": "Description",
+              "description": "A description what the topic actually does",
+              "class": "xsd:string"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

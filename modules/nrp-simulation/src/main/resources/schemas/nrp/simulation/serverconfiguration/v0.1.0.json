@@ -1,0 +1,40 @@
+{
+  "@context": [
+    "{{base}}/contexts/nexus/core/schema/v0.1.0",
+    {
+      "nsg": "https://bbp-nexus.epfl.ch/vocabs/bbp/neurosciencegraph/core/v0.1.0/",
+      "this": "{{base}}/schemas/nrp/simulation/serverconfiguration/v0.1.0/shapes/"
+    }
+  ],
+  "@type": "nxv:Schema",
+  "shapes": [
+    {
+      "@id": "this:ServerConfigurationShape",
+      "@type": "sh:NodeShape",
+      "label": "This shape represents a simulation configuration",
+      "targetClass": "nsg:ServerConfiguration",
+      "nodekind": "sh:BlankNodeOrIRI",
+      "and": [
+        {
+          "node": "{{base}}/schemas/bbp/core/entity/v0.1.0/shapes/EntityShape"
+        },
+        {
+          "property": [
+            {
+              "path": "nsg:configtype",
+              "name": "Configuration type name",
+              "description": "The technical name of the configuration",
+              "class": "xsd:string"
+            },
+            {
+              "path": "nsg:deterministic",
+              "name": "Is detereministic",
+              "description": "Describes whether a server configuration is deterministic",
+              "class": "xsd:boolean"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

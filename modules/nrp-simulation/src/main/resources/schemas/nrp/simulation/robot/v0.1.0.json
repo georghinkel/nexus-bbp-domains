@@ -1,0 +1,60 @@
+{
+  "@context": [
+    "{{base}}/contexts/nexus/core/schema/v0.1.0",
+    {
+      "nsg": "https://bbp-nexus.epfl.ch/vocabs/bbp/neurosciencegraph/core/v0.1.0/",
+      "this": "{{base}}/schemas/nrp/simulation/robot/v0.1.0/shapes/"
+    }
+  ],
+  "@type": "nxv:Schema",
+  "imports": [
+    "{{base}}/schemas/nrp/simulation/topic/v0.1.0"
+  ],
+  "shapes": [
+    {
+      "@id": "this:RobotShape",
+      "@type": "sh:NodeShape",
+      "label": "This shape represents a robot",
+      "targetClass": "nsg:Robot",
+      "nodekind": "sh:BlankNodeOrIRI",
+      "and": [
+        {
+          "node": "{{base}}/schemas/bbp/core/entity/v0.1.0/shapes/EntityShape"
+        },
+        {
+          "property": [
+            {
+              "path": "nsg:sdf",
+              "name": "SDF Path",
+              "description": "Path to the SDF file that describes the robot",
+              "class": "xsd:string",
+              "minCount": 1,
+              "maxCount": 1
+            },
+            {
+              "path": "nsg:externalController",
+              "name": "External Controller",
+              "description": "The external controller for the robot",
+              "class": "xsd:string",
+              "maxCount": 1
+            },
+            {
+              "path": "nsg:sensors",
+              "name": "Sensors",
+              "description": "The sensors of the robot",
+              "class": "nsg:Topic",
+              "node": "{{base}}/schemas/nrp/simulation/topic/v0.1.0/shapes/TopicShape"
+            },
+            {
+              "path": "nsg:actuators",
+              "name": "Actuators",
+              "description": "The actuators of the robot",
+              "class": "nsg:Topic",
+              "node": "{{base}}/schemas/nrp/simulation/topic/v0.1.0/shapes/TopicShape"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

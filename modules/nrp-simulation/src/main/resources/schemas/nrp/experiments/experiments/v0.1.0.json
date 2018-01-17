@@ -1,0 +1,31 @@
+{
+  "@context": [
+    "{{base}}/contexts/nexus/core/schema/v0.1.0",
+    {
+      "nsg": "https://bbp-nexus.epfl.ch/vocabs/bbp/neurosciencegraph/core/v0.1.0/",
+      "this": "{{base}}/schemas/nrp/experiments/experiment/v0.1.0/shapes/"
+    }
+  ],
+  "@type": "nxv:Schema",
+  "imports": [
+    "{{base}}/schemas/nrp/simulation/bibiconfiguration/v0.1.0"
+  ],
+  "shapes": [
+    {
+      "@id": "this:ExperimentShape",
+      "@type": "sh:NodeShape",
+      "label": "This shape represents a neurorobotics experiment",
+      "targetClass": "nsg:Experiment",
+      "nodekind": "sh:BlankNodeOrIRI",
+      "and": [
+        {
+          "node": "{{base}}/schemas/bbp/core/entity/v0.1.0/shapes/EntityShape"
+        },
+        {
+          "property": [
+          ]
+        }
+      ]
+    }
+  ]
+}
